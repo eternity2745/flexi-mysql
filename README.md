@@ -1,5 +1,5 @@
 # Flexi MySQL
-<p>Flexi MySQL is a Python module designed to streamline the process of interacting with MySQL databases. This module offers a variety of functions that significantly reduce the need for manually typing queries, executing them, and handling the results or committing data to the database. Additionally, for scenarios requiring raw SQL queries, the module provides support for creating such queries using MySQL.
+<p>Flexi MySQL is a Python module designed to streamline the process of interacting with MySQL databases. This module offers a variety of functions that significantly reduce the need for manually typing queries, executing them, and handling the results or committing data to the database. Additionally, for scenarios requiring raw SQL queries, the module provides support for creating such queries using MySQL
 
 ## Examples
 ### Fetching results from the database
