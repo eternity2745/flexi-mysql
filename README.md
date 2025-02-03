@@ -4,8 +4,8 @@
 ## Examples
 ### Fetching results from the database
 ```py
-from flexi_mysql import flexi_mysql
-myobj = simple_mysql.connect(host="localhost", user = "root",database="test", password="")
+import flexi_mysql
+myobj = flexi_mysql.connect(host="localhost", user = "root",database="test", password="")
 print(myobj.fetch_result(tables = ["t1"], where="id = 2"))
 ```
 
