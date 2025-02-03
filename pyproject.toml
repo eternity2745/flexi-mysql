@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flexi-mysql"
+version = "0.1.0"
+authors = [{name = "imEternity"}]
+license = {file = "LICENSE"}
+keywords = ["mysql", "simple", "database", "sql"]
+readme = "README.md"
+description = "Python package for simplyfying querying process of mysql"
+dependencies = ["mysql-connector-python"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Utilities",
+  "Topic :: Database"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/eternity2745/simple-mysql#readme"
+"Repository" = "https://github.com/eternity2745/simple-mysql"
