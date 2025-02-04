@@ -15,5 +15,5 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: package_name.module
+.. automodule:: flexi_mysql.__init__.connect
    :members:
