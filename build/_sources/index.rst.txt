@@ -6,10 +6,7 @@
 flexi-mysql documentation
 =========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+Flexi MySQl is a python module for simplyifying the process of querying in MySQL
 
 .. toctree::
    :maxdepth: 2
