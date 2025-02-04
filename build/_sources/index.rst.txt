@@ -15,5 +15,6 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: flexi_mysql.__init__.connect
+.. autoclass:: flexi_mysql.connect
    :members:
+   :undoc-members:

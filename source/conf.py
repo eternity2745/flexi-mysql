@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import sys
-from pathlib import Path
+import os
 
-sys.path.insert(0, str(Path('..', 'flexi_mysql').resolve()))
+sys.path.insert(0, os.path.abspath('../flexi_mysql'))
 
 project = 'flexi-mysql'
 copyright = '2025, imEternity'

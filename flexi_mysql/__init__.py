@@ -20,16 +20,24 @@ class connect():
     def create_database(self, database_name: str) -> None:
         """
             Create New Database
-            :parameters: 
-                `database_name:`
-                    Name of the database to be created
+            Parameters
+            ----------
+
+                database_name: str
+                        Name of the database to be created
+            
+            Returns
+            -------
+
+                None
         """
         self.__cursor.execute(f"CREATE DATABASE IF NOT EXISTS {database_name}")
 
     def drop_database(self, database_name: str) -> None:
         """
             Delete Database
-            :parameters: 
+            Parameters
+            ----------
                 `database_name:`
                     Name of the database to be deleted
         """
@@ -38,7 +46,8 @@ class connect():
     def create_table(self, table_name: str, table_schema: dict[str, str]) -> None:
         """
             Create a new table
-            :parameters: 
+            Parameters
+            ----------
                 `table_name:`
                     Name of the table to be created
                 `table_schema:`
