@@ -5,7 +5,8 @@ class connect():
     def __init__(self, host: str = "", user: str = "", database: str = "", password: str = "", charset: str="utf8", port: int = 3306):
         """
             Connect to MySQL Database
-            :parameters:
+            Parameters
+            ----------
                 `host:(optional)` Name of host
                 `user:(optional)` Username
                 `database:(optional)` Name of Database to connect to
@@ -38,8 +39,14 @@ class connect():
             Delete Database
             Parameters
             ----------
-                `database_name:`
-                    Name of the database to be deleted
+
+                database_name: str
+                        Name of the database to be deleted
+            
+            Returns
+            -------
+
+                None
         """
         self.__cursor.execute(f"DROP DATABASE {database_name}")
 
@@ -48,13 +55,19 @@ class connect():
             Create a new table
             Parameters
             ----------
-                `table_name:`
-                    Name of the table to be created
-                `table_schema:`
+
+                table_name: str
+                        Name of the table to be created
+                table_schema: dict
                     Details of the table to be created in dictionary format
                     Eg: {"id" : "INT PRIMARY KEY", 
                          "name" : "varchar(255) NOT NULL"   
                          }
+            
+            Returns
+            -------
+
+                None
         """
         q = f"CREATE TABLE {table_name} ("
         c = 1
@@ -69,8 +82,17 @@ class connect():
     def drop_table(self, table_name: str) -> None:
         """
             Deletes the specified table
-            :parameters:
-                `table_name:` The name of table to be deleted
+            Parameters
+            ----------
+
+                table_name: str
+                        The name of table to be deleted
+
+            
+            Returns
+            -------
+
+                None
         """
         q = f"DROP TABLE {table_name}"
         self.__cursor.execute(q)
@@ -78,8 +100,16 @@ class connect():
     def truncate_table(self, table_name: str) -> None:
         """
             Deletes the contents from the specified table
-            :parameters:
-                `table_name:` The name of table to be delete the contents from
+            Parameters
+            ----------
+
+                table_name: str
+                        The name of table to be delete the contents from
+            
+            Returns
+            -------
+
+                None
         """
         q = f"TRUNCATE TABLE {table_name}"
         self.__cursor.execute(q)
@@ -103,11 +133,21 @@ class connect():
     def add_column(self, table_name: str, column_name: str, datatype: str, constraints: str=None) -> None:
         """
             Adds a new column to the specified table
-            :parameters:
-                `table_name:` Name of the table
-                `column_name:` Name of column to be added
-                `datatype:` Datatype of the column
-                `constraints:(optional)` Constraints to be added like PRIMARY KEY
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table
+                column_name: str
+                        Name of column to be added
+                datatype: str
+                         Datatype of the column
+                constraints: str
+                         Constraints to be added like PRIMARY KEY
+            
+            Returns
+            -------
+
+                None
         """
         q = f"ALTER TABLE {table_name} ADD {column_name} {datatype}"
         if (constraints):
@@ -118,9 +158,17 @@ class connect():
     def drop_column(self, table_name: str, column_name: str) -> None:
         """
             Deletes the specified column from the table
-            :parameters:
-                `table_name:` Name of the table
-                `column_name:` Name of the column to be deleted
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table
+                column_name: str
+                        Name of the column to be deleted
+            
+            Returns
+            -------
+
+                None
         """
         q = f"ALTER TABLE {table_name} DROP COLUMN {column_name}"
         self.__cursor.execute(q)
@@ -129,11 +177,21 @@ class connect():
     def modify_column(self, table_name: str, column_name: str, datatype: str, constraints: str=None) -> None:
         """
             Modify the colummn of a table
-            :parameters:
-                `table_name:` Name of the table
-                `column_name:` Name of the column to be modified
-                `datatype:` Datatype of the column
-                `constraints(optional):` Constraints to be added to the column like PRIMARY KEY
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table
+                column_name: str
+                        Name of the column to be modified
+                datatype: str
+                        Datatype of the column
+                constraints: str
+                        Constraints to be added to the column like PRIMARY KEY
+            
+            Returns
+            -------
+
+                None
 
         """
         q = f"ALTER TABLE {table_name} MODIFY COLUMN {column_name} {datatype}"
@@ -145,8 +203,15 @@ class connect():
     def drop_primarykey(self, table_name: str) -> None:
         """
             Delete the primary key from the table specfied
-            :parameters:
-                `table_name:` Name of the table from which the primary key is to be deleted
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table from which the primary key is to be deleted
+
+            Returns
+            -------
+
+                None
         """
         q = f"ALTER TABLE {table_name} DROP PRIMARY KEY"
         self.__cursor.execute(q)
@@ -155,9 +220,17 @@ class connect():
     def drop_foreignkey(self, table_name: str, constraint_name: str) -> None:
         """
             Delete the foriegn key from the table specified
-            :parameters:
-                `table_name:` Name of the table from which the primary key is to be deleted
-                `constraint_name:` The constraint name of the column which is a foriegn key
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table from which the primary key is to be deleted
+                constraint_name: str
+                        The constraint name of the column which is a foriegn key
+            
+            Returns
+            -------
+
+                None
         """
         q = f"ALTER TABLE {table_name} DROP FOREIGN KEY {constraint_name}"
         self.__cursor.execute(q)
@@ -166,8 +239,15 @@ class connect():
     def describe_table(self, table_name: str) -> list[tuple]:
         """
             Shows the structure of the specified table
-            :parameters:
-                `table_name:` Name of the table
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table
+
+            Returns
+            -------
+
+                None
         """
         try:
             q = f"DESC {table_name}"
@@ -180,17 +260,32 @@ class connect():
     def fetch_result(self, tables: list[str], columns:list[str] = [], where: str = None, order_by: str = None, ascending: bool = False, descending: bool = False, group_by: str = None, having: str = None, limit: int = None) -> list[tuple]:
         """
             Used to fetch results from the database
-            :parameters:
-                `tables:` List of tables to be fetched. Eg: ["users", "songs"].
-                `columns:(optional)` List of columns to be fetched. Selects all columns if no column is specified. Eg: ["id", "name"].
-                `where:(optional)` Condition to be checked while fetching the results. Eg: "id = 2".
-                `order_by:(optional)` Order by the given column. Eg: "id" or "id, name".
-                `ascending:(optional)` Order the result in ascending order.
-                `descending:(optional)` Order the result in descending order.
-                `group_by:(optional)` Group the result using a column. Eg: "id".
-                `having:(optional)` Used along with group_by for checking a specific condition. Eg: "gender = 'M'".
-                `limit:(optional)` Used to limit the number of rows fetched.
-                `
+            Parameters
+            ----------
+                tables: list
+                        List of tables to be fetched. Eg: ["users", "songs"].
+                columns: list
+                        List of columns to be fetched. Selects all columns if no column is specified. Eg: ["id", "name"].
+                where: str
+                        Condition to be checked while fetching the results. Eg: "id = 2".
+                order_by: str
+                        Order by the given column. Eg: "id" or "id, name".
+                ascending: bool
+                        Order the result in ascending order.
+                descending: bool
+                        Order the result in descending order.
+                group_by: str
+                        Group the result using a column. Eg: "id".
+                having: str
+                        Used along with group_by for checking a specific condition. Eg: "gender = 'M'".
+                limit: int
+                        Used to limit the number of rows fetched.
+
+            Returns
+            -------
+
+                list
+                
         """
         q = f"SELECT "
 
@@ -232,7 +327,8 @@ class connect():
     def update_value(self, table_name: str, columns: list[str], set_values: list, where: str = None) -> None:
         """
             Update the values in the specified table.
-            :parameters:
+            Parameters
+            ----------
                 `table_name:` Name of the table
                 `columns:` List of columns to be updated. Eg: ["name", "age"]
                 `set_values:` List of values to be set to the appropriate columns. Eg: ["Eternity", 67]
@@ -258,10 +354,19 @@ class connect():
     def insert_value(self, table_name: str, value: list, columns:list[str] = []) -> None:
         """
             Used to insert a single set of values to the specified table.
-            :parameters:
-                `table_name:` Name of the table
-                `columns:(optional)` List of columns where the value is to be inserted. If not specified value will be inserted into all columns in the table. Eg: ["id", "name", "age"]
-                `value:` List of the set of values to be inserted. Eg: [1, "A", 32]
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table
+                columns: list
+                        List of columns where the value is to be inserted. If not specified value will be inserted into all columns in the table. Eg: ["id", "name", "age"]
+                value: list
+                        List of the set of values to be inserted. Eg: [1, "A", 32]
+
+            Returns
+            -------
+
+                None
         """
         q = f"INSERT INTO {table_name}"
 
@@ -292,10 +397,19 @@ class connect():
     def insert_values(self, table_name: str, values: list[list], columns: list[str] = []) -> None:
         """
             Used to insert multiple sets of values to the specified table.
-            :parameters:
-                `table_name:` Name of the table
-                `columns:(optional)` List of columns where the value is to be inserted. If not specified value will be inserted into all columns in the table. Eg: ["id", "name", "age"]
-                `values:` Nested List of the sets of values to be inserted. Eg: [[1, "A", 32], [2, "B", 42], [3, "C", 43]]
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table
+                columns: list
+                        List of columns where the value is to be inserted. If not specified value will be inserted into all columns in the table. Eg: ["id", "name", "age"]
+                values: list
+                        Nested List of the sets of values to be inserted. Eg: [[1, "A", 32], [2, "B", 42], [3, "C", 43]]
+
+            Returns
+            -------
+
+                None
         """
         q = f"INSERT INTO {table_name}"
 
@@ -330,9 +444,17 @@ class connect():
     def delete_value(self, table_name: str, where: str = None) -> None:
         """
             Deletes value(s) from the specified table
-            :parameters:
-                `table_name:` Name of the table
-                `where:(optional)`: Condition to check before deleting the value(s). If not specified will delete all the values from the table. Eg: "id = 3"
+            Parameters
+            ----------
+                table_name: str
+                        Name of the table
+                where: str
+                        Condition to check before deleting the value(s). If not specified will delete all the values from the table. Eg: "id = 3"
+            
+            Returns
+            -------
+
+                None
         """
         q = f"DELETE FROM {table_name}"
 
@@ -344,11 +466,21 @@ class connect():
     def inner_join(self, table_name1: str, table_name2: str, columns: list[str] = [], condition: str = None) -> list[tuple]:
         """
             Used for INNER JOIN of two tables
-            :parameters:
-                `table_name1:` Name of first table
-                `table_name2:` Name of the second table to be interjoined with first
-                `columns:(optional)` List of columns from both the tables. Eg: ["name", "purchases"]
-                `condition:(optional)` Condition to be checked on inner join
+            Parameters
+            ----------
+                table_name1: str
+                        Name of first table
+                table_name2: str
+                        Name of the second table to be interjoined with first
+                columns: list
+                        List of columns from both the tables. Eg: ["name", "purchases"]
+                condition: str
+                        Condition to be checked on inner join
+            
+            Returns
+            -------
+
+                list
         """
         q = f"SELECT "
 
@@ -370,11 +502,21 @@ class connect():
     def left_join(self, table_name1: str, table_name2: str, columns: list[str] = [], condition: str = None) -> list[tuple]:
         """
             Used for LEFT JOIN of two tables
-            :parameters:
-                `table_name1:` Name of first table
-                `table_name2:` Name of the second table to be leftjoined with first
-                `columns:(optional)` List of columns from both the tables. Eg: ["name", "purchases"]
-                `condition:(optional)` Condition to be checked on left join
+            Parameters
+            ----------
+                table_name1: str
+                        Name of first table
+                table_name2: str 
+                        Name of the second table to be leftjoined with first
+                columns: list
+                        List of columns from both the tables. Eg: ["name", "purchases"]
+                condition: str
+                        Condition to be checked on left join
+
+            Returns
+            -------
+
+                list
         """
         q = f"SELECT "
 
@@ -396,11 +538,21 @@ class connect():
     def right_join(self, table_name1: str, table_name2: str, columns: list[str] = [], condition: str = None) -> list[tuple]:
         """
             Used for RIGHT JOIN of two tables
-            :parameters:
-                `table_name1:` Name of first table
-                `table_name2:` Name of the second table to be rightjoined with first
-                `columns:(optional)` List of columns from both the tables. Eg: ["name", "purchases"]
-                `condition:(optional)` Condition to be checked on right join
+            Parameters
+            ----------
+                table_name1: str
+                        Name of first table
+                table_name2: str
+                        Name of the second table to be rightjoined with first
+                columns: list
+                        List of columns from both the tables. Eg: ["name", "purchases"]
+                condition: str
+                        Condition to be checked on right join
+
+            Returns
+            -------
+
+                list
         """
         q = f"SELECT "
 
@@ -422,10 +574,19 @@ class connect():
     def cross_join(self, table_name1: str, table_name2: str, columns: list[str] = []) -> list[tuple]:
         """
             Used for CROSS JOIN of two tables
-            :parameters:
-                `table_name1:` Name of first table
-                `table_name2:` Name of the second table to be crossjoined with first
-                `columns:(optional)` List of columns from both the tables. Eg: ["name", "purchases"]
+            Parameters
+            ----------
+                table_name1: str
+                        Name of first table
+                table_name2: str
+                        Name of the second table to be crossjoined with first
+                columns: list
+                        List of columns from both the tables. Eg: ["name", "purchases"]
+            
+            Returns
+            -------
+
+                list
         """
         q = f"SELECT "
 
@@ -445,8 +606,15 @@ class connect():
     def raw_query(self, query: str) -> list[tuple]:
         """
             Used for fetching results from a table using MySQL Query
-            :parameters:
-                `query:` Query to be used for fetching results. Eg: "SELECT * FROM users"
+            Parameters
+            ----------
+                query: str
+                        Query to be used for fetching results. Eg: "SELECT * FROM users"
+                
+            Returns
+            -------
+
+                list
         """
         self.__cursor.execute(query)
         return self.__cursor.fetchall()
@@ -454,8 +622,15 @@ class connect():
     def raw_update(self, query: str) -> None:
         """
             Used for updating values to a table using MySQL Query
-            :parameters:
-                `query:` Query to be used for updating the values. Eg: "UPDATE users SET name = 'C' WHERE id = 3"
+            Parameters
+            ----------
+                query: str
+                        Query to be used for updating the values. Eg: "UPDATE users SET name = 'C' WHERE id = 3"
+            
+            Returns
+            -------
+
+                None
         """
         self.__cursor.execute(query)
         self.__con.commit()
@@ -463,8 +638,15 @@ class connect():
     def raw_delete(self, query: str) -> None:
         """
             Used for deleting values from a table using MySQL Query
-            :parameters:
-                `query:` Query to be used for deleting the values. Eg: "DELETE FROM users WHERE id = 3"
+            Parameters
+            ----------
+                query: str
+                        Query to be used for deleting the values. Eg: "DELETE FROM users WHERE id = 3"
+
+            Returns
+            -------
+
+                None
         """
         self.__cursor.execute(query)
         self.__con.commit()
