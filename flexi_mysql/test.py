@@ -1,5 +1,6 @@
 import __init__ as a
 import string_decorator as sd
+
 # a.connect(host="localhost", user = "root",database="test", password="", charset="utf8")
 # print(a.fetchresult(table="songs", condition = "id in (5,6,7,8)", orderBy="title"))
 # a.updatetable(table="t1", column = "name", setvalue="hello", condition="id = 2")
