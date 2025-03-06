@@ -9,7 +9,24 @@ import flexi_mysql
 myobj = flexi_mysql.connect(host="localhost", user = "root",database="test", password="")
 print(myobj.fetch_result(tables = ["t1"], where="id = 2"))
 ```
-
+### Close connection
+```py
+import flexi_mysql 
+myobj = flexi_mysql.connect(host="localhost", user = "root",database="test", password="")
+myobj.close_connection()
+```
+### Update value in a table
+```py
+import flexi_mysql
+myobj =  flexi_mysql.connect(host="localhost", user="root", database="test")
+myobj.update_value(table_name="t1", columns = ["name"], value="Eternity", where = "id = 4")
+```
+### Fetching results from database using with statement
+```py
+import flexi_mysql
+with flexi_mysql.connect(host="localhost", user="root", database="test") as myobj:
+    print(myobj.fetch_result(tables = ["t1"], where="id = 2"))
+```
 ## Documentation
 
 | Name | Description |
