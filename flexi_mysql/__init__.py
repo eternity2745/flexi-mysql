@@ -18,6 +18,13 @@ class connect():
         self.__con = mc.connect(host=host, user=user, database=database, password = password, charset=charset, port=port)
         self.__cursor = self.__con.cursor()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.__cursor.close()
+        self.__con.close()
+
     def create_database(self, database_name: str) -> None:
         """
             Create New Database
