@@ -1,5 +1,5 @@
 # Flexi MySQL
-[![PyPI Downloads](https://static.pepy.tech/badge/flexi-mysql)](https://pepy.tech/projects/flexi-mysql)
+[![PyPI version](https://badge.fury.io/py/flexi-mysql.svg)](https://badge.fury.io/py/flexi-mysql) [![PyPI Downloads](https://static.pepy.tech/badge/flexi-mysql)](https://pepy.tech/projects/flexi-mysql) [![Downloads](https://static.pepy.tech/badge/flexi-mysql/month)](https://pepy.tech/project/flexi-mysql) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <p>Flexi MySQL is a Python module designed to streamline the process of interacting with MySQL databases. This module offers a variety of functions that significantly reduce the need for manually typing queries, executing them, and handling the results or committing data to the database. Additionally, for scenarios requiring raw SQL queries, the module provides support for creating such queries using MySQL
 
 ## Examples
