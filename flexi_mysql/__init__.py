@@ -1,4 +1,11 @@
 import mysql.connector as mc
+__author__ = "Eternity"
+__copyright__ = "Copyright 2025, Eternity"
+__credits__ = ["Eternity"]
+__license__ = "MIT"
+__version__ = "0.5.0"
+__maintainer__ = "Eternity"
+__email__ = "vsdevan2006@gmail.com"
 
 class connect():
     
