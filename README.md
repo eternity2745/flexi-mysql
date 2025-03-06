@@ -19,7 +19,7 @@ myobj.close_connection()
 ```py
 import flexi_mysql
 myobj =  flexi_mysql.connect(host="localhost", user="root", database="test")
-myobj.update_value(table_name="t1", columns = ["name"], value="Eternity", where = "id = 4")
+myobj.update_value(table_name="t1", columns = ["name"], set_values=["Eternity"], where = "id = 4")
 ```
 ### Fetching results from database using with statement
 ```py
